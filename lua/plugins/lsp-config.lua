@@ -143,6 +143,8 @@ return {
 					},
 				},
 			},
+			eslint = {},
+			prettier = {},
 		}
 		require("mason").setup()
 
