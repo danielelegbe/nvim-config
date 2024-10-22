@@ -14,6 +14,10 @@ return {
 		-- Allows extra capabilities provided by nvim-cmp
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/nvim-cmp",
+		{
+			"pmizio/typescript-tools.nvim",
+			dependencies = { "nvim-lua/plenary.nvim" },
+		},
 	},
 	config = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -65,6 +69,9 @@ return {
 				-- WARN: This is not Goto Definition, this is Goto Declaration.
 				--  For example, in C this would take you to the header.
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+				map("<leader>ai", ":TSToolsAddMissingImports<CR>", "[Add] Missing [I]mports")
+				map("<leader>oi", ":TSToolsRemoveUnusedImports<CR>", "Remove Unused [I]mports")
 
 				-- The following two autocommands are used to highlight references of the
 				-- word under your cursor when your cursor rests there for a little while.
@@ -124,16 +131,6 @@ return {
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
-			ts_ls = {
-				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }, -- Support JS, JSX, TS, and TSX
-				root_dir = require("lspconfig").util.root_pattern(
-					"package.json",
-					"tsconfig.json",
-					"jsconfig.json",
-					".git"
-				),
-				capabilities = capabilities,
-			},
 			lua_ls = {
 				settings = {
 					Lua = {
@@ -152,7 +149,7 @@ return {
 		vim.list_extend(ensure_installed, {
 			"stylua", -- Used to format Lua code
 		})
-		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+		require("mason-tool-installer").setup({ ensure_installed = ensure_installed, auto_install = true })
 
 		require("mason-lspconfig").setup({
 			handlers = {
@@ -166,5 +163,7 @@ return {
 				end,
 			},
 		})
+
+		require("typescript-tools").setup({})
 	end,
 }

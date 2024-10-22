@@ -5,31 +5,10 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("telescope").setup({
-				pickers = {
-					find_files = {
-						layout_config = {
-							width = 0.95,
-						},
-					},
-					live_grep = {
-						layout_config = {
-							width = 0.95,
-						},
-					},
-					oldfiles = {
-						layout_config = {
-							width = 0.95,
-						},
-					},
-					current_buffer_fuzzy_find = {
-						layout_config = {
-							width = 0.95,
-						},
-					},
-					lsp_references = {
-						layout_config = {
-							width = 0.95,
-						},
+				defaults = {
+					path_display = { "truncate" },
+					layout_config = {
+						width = 0.95,
 					},
 				},
 			})
@@ -43,7 +22,9 @@ return {
 				})
 			end, { desc = "[S]earch in All [F]iles" })
 
-			vim.keymap.set("n", "<leader>.", builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
+			vim.keymap.set("n", "<leader>.", function()
+				builtin.oldfiles({ prompt_title = "Recent Files" })
+			end, { desc = "Search Recent Files" })
 
 			vim.keymap.set("n", "<leader>/", function()
 				require("telescope.builtin").current_buffer_fuzzy_find({
