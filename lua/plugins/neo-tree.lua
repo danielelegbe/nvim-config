@@ -7,6 +7,6 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
-		vim.keymap.set("n", "<leader>n", ":Neotree toggle reveal<CR>", { desc = "Show file in NeoTree" })
+		vim.keymap.set("n", "<leader>n", ":Neotree toggle float reveal<CR>", { desc = "Show file in NeoTree" })
 	end,
 }

@@ -26,6 +26,11 @@ return {
 							width = 0.95,
 						},
 					},
+					lsp_references = {
+						layout_config = {
+							width = 0.95,
+						},
+					},
 				},
 			})
 
@@ -42,7 +47,7 @@ return {
 
 			vim.keymap.set("n", "<leader>/", function()
 				require("telescope.builtin").current_buffer_fuzzy_find({
-					prompt_title = "Search in Current File",
+					prompt_title = "Search in Current Buffer",
 				})
 			end, { desc = "Search [/] in current file" })
 		end,

@@ -14,13 +14,16 @@ return {
 				end
 				return "make install_jsregexp"
 			end)(),
-			dependencies = {},
+			dependencies = {
+				"rafamadriz/friendly-snippets",
+			},
 		},
 		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
 	},
 	config = function()
+		require("luasnip.loaders.from_vscode").lazy_load()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		luasnip.config.setup({})
@@ -51,11 +54,6 @@ return {
 				--  This will auto-import if your LSP supports it.
 				--  This will expand snippets if the LSP sent a snippet.
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
-
-				-- If you prefer more traditional completion keymaps,
-				-- you can uncomment the following lines
-				--['<Tab>'] = cmp.mapping.select_next_item(),
-				--['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
 				-- Manually trigger a completion from nvim-cmp.
 				--  Generally you don't need this, because nvim-cmp will display
