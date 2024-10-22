@@ -10,5 +10,8 @@ return {
 			close_on_exit = true, -- Automatically close the terminal when the process exits
 			shell = vim.o.shell, -- Set the default shell
 		})
+		vim.keymap.set("n", "<leader>tt", function()
+			require("toggleterm").toggle()
+		end, { desc = "[T]oggle [T]erminal" })
 	end,
 }
