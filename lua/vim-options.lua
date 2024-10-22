@@ -42,3 +42,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+vim.keymap.set("n", "<leader>tt", function()
+	vim.cmd("silent !tmux send-keys -t 0 C-b t")
+end, { desc = "Toggle tmux terminal" })
+
+-- stop neovim from quitting when pressing <C-z>
+vim.keymap.set("n", "<C-z>", "<Nop>", { noremap = true })

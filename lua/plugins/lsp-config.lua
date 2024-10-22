@@ -142,6 +142,7 @@ return {
 			},
 			eslint = {},
 			prettier = {},
+			jsonls = {},
 		}
 		require("mason").setup()
 
