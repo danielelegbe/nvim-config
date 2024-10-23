@@ -143,6 +143,9 @@ return {
 			eslint = {},
 			prettier = {},
 			jsonls = {},
+			rust_analyzer = {},
+			gopls = {},
+			prismals = {},
 		}
 		require("mason").setup()
 
